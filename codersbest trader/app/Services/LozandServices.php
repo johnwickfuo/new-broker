@@ -729,6 +729,13 @@ class LozandServices
             'change_1d'                 => $change,
             'change_1d_percentage'      => $changePct,
             'change_1d_percent'         => $changePct,
+            // Stock detail fields (not in free tier — safe empty defaults)
+            'sector'                    => $quote['sector']              ?? '',
+            'cik'                       => $quote['cik']                 ?? '',
+            'dividend_yield'            => (float)($quote['dividend_yield'] ?? 0),
+            // ETF-specific fields (free tier doesn't return AUM or NAV separately)
+            'assets_under_management'   => (float)($quote['aum']         ?? 0),
+            'current_nav'               => (float)($quote['nav']         ?? $quote['close'] ?? 0),
             // Stock logo via Clearbit Logo API (returns blank image if not found, never crashes)
             'public_png_logo_url'       => 'https://logo.clearbit.com/' . strtolower($symbol) . '.com',
         ];
@@ -765,31 +772,44 @@ class LozandServices
      */
     private function normalizeBinanceTicker(array $ticker): array
     {
-        $symbol        = $ticker['symbol'] ?? '';
-        $change        = (float)($ticker['priceChange']        ?? 0);
-        $changePct     = (float)($ticker['priceChangePercent'] ?? 0);
+        $symbol    = $ticker['symbol'] ?? '';
+        $change    = (float)($ticker['priceChange']        ?? 0);
+        $changePct = (float)($ticker['priceChangePercent'] ?? 0);
+
+        // Derive base/quote currencies from symbol (e.g. "BTCUSDT" → base="BTC", quote="USDT")
+        $quoteAssets = ['USDT', 'BUSD', 'USDC', 'BNB', 'BTC', 'ETH'];
+        $quoteAsset  = 'USDT';
+        $baseAsset   = $symbol;
+        foreach ($quoteAssets as $qa) {
+            if (str_ends_with($symbol, $qa)) {
+                $quoteAsset = $qa;
+                $baseAsset  = substr($symbol, 0, -strlen($qa));
+                break;
+            }
+        }
 
         // Derive a crypto logo filename for the cryptocurrency-icons SVG repo.
-        // e.g. "BTCUSDT" → "btc.svg", "ETHUSDT" → "eth.svg"
-        $base  = strtolower(preg_replace('/(usdt|busd|usdc|bnb|btc|eth)$/i', '', $symbol));
-        $logo  = $base ? $base . '.svg' : 'generic.svg';
+        $logo = $baseAsset ? strtolower($baseAsset) . '.svg' : 'generic.svg';
 
         return [
-            'ticker'              => $symbol,
-            'current_price'       => (float)($ticker['lastPrice'] ?? 0),
-            'bid'                 => (float)($ticker['bidPrice']  ?? 0),
-            'ask'                 => (float)($ticker['askPrice']  ?? 0),
-            'change'              => $change,
-            'change_percent'      => $changePct,
-            'high_24h'            => (float)($ticker['highPrice']  ?? 0),
-            'low_24h'             => (float)($ticker['lowPrice']   ?? 0),
-            'volume_24h'          => (float)($ticker['volume']     ?? 0),
-            'quote_volume'        => (float)($ticker['quoteVolume'] ?? 0),
+            'ticker'               => $symbol,
+            'base'                 => $baseAsset,   // e.g. "BTC"
+            'quote'                => $quoteAsset,  // e.g. "USDT"
+            'current_price'        => (float)($ticker['lastPrice']  ?? 0),
+            'open_price'           => (float)($ticker['openPrice']  ?? 0),
+            'bid'                  => (float)($ticker['bidPrice']   ?? 0),
+            'ask'                  => (float)($ticker['askPrice']   ?? 0),
+            'change'               => $change,
+            'change_percent'       => $changePct,
+            'high_24h'             => (float)($ticker['highPrice']  ?? 0),
+            'low_24h'              => (float)($ticker['lowPrice']   ?? 0),
+            'volume_24h'           => (float)($ticker['volume']     ?? 0),
+            'quote_volume'         => (float)($ticker['quoteVolume'] ?? 0),
             // Aliases expected by existing blade templates (previously from Binso)
-            'logo'                => $logo,
-            'change_1d'           => $change,
-            'change_1d_percentage'=> $changePct,
-            'change_1d_percent'   => $changePct,
+            'logo'                 => $logo,
+            'change_1d'            => $change,
+            'change_1d_percentage' => $changePct,
+            'change_1d_percent'    => $changePct,
         ];
     }
 
@@ -798,13 +818,15 @@ class LozandServices
      */
     private function normalizeBinanceTrade(array $trade): array
     {
+        $isBuyerMaker = $trade['isBuyerMaker'] ?? false;
         return [
-            'id'              => $trade['id']             ?? null,
-            'price'           => $trade['price']          ?? '0',
-            'qty'             => $trade['qty']            ?? '0',
-            'time'            => $trade['time']           ?? 0,
-            'side'            => isset($trade['isBuyerMaker']) && $trade['isBuyerMaker'] ? 'sell' : 'buy',
-            'is_buyer_maker'  => $trade['isBuyerMaker']   ?? false,
+            'id'              => $trade['id']    ?? null,
+            'price'           => $trade['price'] ?? '0',
+            'qty'             => $trade['qty']   ?? '0',
+            'time'            => $trade['time']  ?? 0,
+            'side'            => $isBuyerMaker ? 'sell' : 'buy',
+            'is_buyer_maker'  => $isBuyerMaker,
+            'isBuyerMaker'    => $isBuyerMaker,  // raw Binance key alias for blade templates
         ];
     }
 
@@ -829,6 +851,10 @@ class LozandServices
                 'price'         => 95.50,
                 'yield'         => 4.72,
                 'type'          => 'Treasury Bond',
+                'issuer'        => 'US Department of the Treasury',
+                'flag'          => 'us',
+                'county'        => 'United States',
+                'rating'        => 'AAA',
             ],
             [
                 'cusip'         => '912810TL2',
@@ -839,6 +865,10 @@ class LozandServices
                 'price'         => 82.25,
                 'yield'         => 4.89,
                 'type'          => 'Treasury Bond',
+                'issuer'        => 'US Department of the Treasury',
+                'flag'          => 'us',
+                'county'        => 'United States',
+                'rating'        => 'AAA',
             ],
             [
                 'cusip'         => '912810TK4',
@@ -849,6 +879,10 @@ class LozandServices
                 'price'         => 68.75,
                 'yield'         => 4.78,
                 'type'          => 'Treasury Bond',
+                'issuer'        => 'US Department of the Treasury',
+                'flag'          => 'us',
+                'county'        => 'United States',
+                'rating'        => 'AAA',
             ],
             [
                 'cusip'         => '912810SN7',
@@ -859,6 +893,10 @@ class LozandServices
                 'price'         => 61.50,
                 'yield'         => 4.81,
                 'type'          => 'Treasury Bond',
+                'issuer'        => 'US Department of the Treasury',
+                'flag'          => 'us',
+                'county'        => 'United States',
+                'rating'        => 'AAA',
             ],
             [
                 'cusip'         => '912828YV6',
@@ -869,6 +907,10 @@ class LozandServices
                 'price'         => 88.25,
                 'yield'         => 4.62,
                 'type'          => 'Treasury Note',
+                'issuer'        => 'US Department of the Treasury',
+                'flag'          => 'us',
+                'county'        => 'United States',
+                'rating'        => 'AAA',
             ],
             [
                 'cusip'         => '91282CAF2',
@@ -879,6 +921,10 @@ class LozandServices
                 'price'         => 92.10,
                 'yield'         => 4.48,
                 'type'          => 'Treasury Note',
+                'issuer'        => 'US Department of the Treasury',
+                'flag'          => 'us',
+                'county'        => 'United States',
+                'rating'        => 'AAA',
             ],
             [
                 'cusip'         => '912828ZT0',
@@ -889,6 +935,10 @@ class LozandServices
                 'price'         => 90.75,
                 'yield'         => 4.55,
                 'type'          => 'Treasury Note',
+                'issuer'        => 'US Department of the Treasury',
+                'flag'          => 'us',
+                'county'        => 'United States',
+                'rating'        => 'AAA',
             ],
             [
                 'cusip'         => '912828YK0',
@@ -899,6 +949,10 @@ class LozandServices
                 'price'         => 86.50,
                 'yield'         => 4.65,
                 'type'          => 'Treasury Note',
+                'issuer'        => 'US Department of the Treasury',
+                'flag'          => 'us',
+                'county'        => 'United States',
+                'rating'        => 'AAA',
             ],
             [
                 'cusip'         => '912796ZR9',
@@ -909,6 +963,10 @@ class LozandServices
                 'price'         => 99.40,
                 'yield'         => 5.35,
                 'type'          => 'Treasury Bill',
+                'issuer'        => 'US Department of the Treasury',
+                'flag'          => 'us',
+                'county'        => 'United States',
+                'rating'        => 'AAA',
             ],
             [
                 'cusip'         => '912796YV1',
@@ -919,6 +977,10 @@ class LozandServices
                 'price'         => 98.50,
                 'yield'         => 5.25,
                 'type'          => 'Treasury Bill',
+                'issuer'        => 'US Department of the Treasury',
+                'flag'          => 'us',
+                'county'        => 'United States',
+                'rating'        => 'AAA',
             ],
         ];
     }
@@ -930,58 +992,70 @@ class LozandServices
     {
         return [
             [
-                'ticker'       => 'VFIAX',
-                'name'         => 'Vanguard 500 Index Fund Admiral Shares',
-                'category'     => 'Large Blend',
-                'nav'          => 489.25,
-                'ytd_return'   => 12.45,
-                'expense_ratio' => 0.04,
-                'aum_billions' => 890.5,
+                'ticker'                 => 'VFIAX',
+                'name'                   => 'Vanguard 500 Index Fund Admiral Shares',
+                'category'               => 'Large Blend',
+                'nav'                    => 489.25,
+                'current_nav'            => 489.25,
+                'ytd_return'             => 12.45,
+                'expense_ratio'          => 0.04,
+                'aum_billions'           => 890.5,
+                'assets_under_management' => 890.5,
             ],
             [
-                'ticker'       => 'FXAIX',
-                'name'         => 'Fidelity 500 Index Fund',
-                'category'     => 'Large Blend',
-                'nav'          => 196.80,
-                'ytd_return'   => 12.48,
-                'expense_ratio' => 0.015,
-                'aum_billions' => 550.2,
+                'ticker'                 => 'FXAIX',
+                'name'                   => 'Fidelity 500 Index Fund',
+                'category'               => 'Large Blend',
+                'nav'                    => 196.80,
+                'current_nav'            => 196.80,
+                'ytd_return'             => 12.48,
+                'expense_ratio'          => 0.015,
+                'aum_billions'           => 550.2,
+                'assets_under_management' => 550.2,
             ],
             [
-                'ticker'       => 'SWPPX',
-                'name'         => 'Schwab S&P 500 Index Fund',
-                'category'     => 'Large Blend',
-                'nav'          => 78.50,
-                'ytd_return'   => 12.41,
-                'expense_ratio' => 0.02,
-                'aum_billions' => 90.3,
+                'ticker'                 => 'SWPPX',
+                'name'                   => 'Schwab S&P 500 Index Fund',
+                'category'               => 'Large Blend',
+                'nav'                    => 78.50,
+                'current_nav'            => 78.50,
+                'ytd_return'             => 12.41,
+                'expense_ratio'          => 0.02,
+                'aum_billions'           => 90.3,
+                'assets_under_management' => 90.3,
             ],
             [
-                'ticker'       => 'VTSAX',
-                'name'         => 'Vanguard Total Stock Market Index',
-                'category'     => 'Large Blend',
-                'nav'          => 128.75,
-                'ytd_return'   => 11.98,
-                'expense_ratio' => 0.04,
-                'aum_billions' => 1320.8,
+                'ticker'                 => 'VTSAX',
+                'name'                   => 'Vanguard Total Stock Market Index',
+                'category'               => 'Large Blend',
+                'nav'                    => 128.75,
+                'current_nav'            => 128.75,
+                'ytd_return'             => 11.98,
+                'expense_ratio'          => 0.04,
+                'aum_billions'           => 1320.8,
+                'assets_under_management' => 1320.8,
             ],
             [
-                'ticker'       => 'AGTHX',
-                'name'         => 'American Funds Growth Fund of America',
-                'category'     => 'Large Growth',
-                'nav'          => 67.30,
-                'ytd_return'   => 15.72,
-                'expense_ratio' => 0.64,
-                'aum_billions' => 238.4,
+                'ticker'                 => 'AGTHX',
+                'name'                   => 'American Funds Growth Fund of America',
+                'category'               => 'Large Growth',
+                'nav'                    => 67.30,
+                'current_nav'            => 67.30,
+                'ytd_return'             => 15.72,
+                'expense_ratio'          => 0.64,
+                'aum_billions'           => 238.4,
+                'assets_under_management' => 238.4,
             ],
             [
-                'ticker'       => 'PIMCO',
-                'name'         => 'PIMCO Total Return Fund',
-                'category'     => 'Intermediate Core Bond',
-                'nav'          => 9.45,
-                'ytd_return'   => 3.82,
-                'expense_ratio' => 0.82,
-                'aum_billions' => 64.1,
+                'ticker'                 => 'PIMCO',
+                'name'                   => 'PIMCO Total Return Fund',
+                'category'               => 'Intermediate Core Bond',
+                'nav'                    => 9.45,
+                'current_nav'            => 9.45,
+                'ytd_return'             => 3.82,
+                'expense_ratio'          => 0.82,
+                'aum_billions'           => 64.1,
+                'assets_under_management' => 64.1,
             ],
         ];
     }
