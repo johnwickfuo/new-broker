@@ -106,7 +106,7 @@
                                     class="flex items-center gap-6 p-6 rounded-3xl bg-white/5 border border-white/10 group/item">
                                     <div
                                         class="w-20 h-20 rounded-2xl bg-secondary/80 border border-white/10 p-3 flex items-center justify-center overflow-hidden shrink-0">
-                                        <img src="{{ asset('assets/images/' . getSetting('logo_square')) }}"
+                                        <img loading="lazy" decoding="async" src="{{ asset('assets/images/' . getSetting('logo_square')) }}"
                                             id="preview-logo-square"
                                             class="max-w-full max-h-full object-contain transition-transform group-hover/item:scale-110">
                                     </div>
@@ -129,7 +129,7 @@
                                     class="flex flex-col gap-4 p-6 rounded-3xl bg-white/5 border border-white/10 group/item">
                                     <div
                                         class="h-20 rounded-2xl bg-secondary/80 border border-white/10 p-4 flex items-center justify-center overflow-hidden">
-                                        <img src="{{ asset('assets/images/' . getSetting('logo_rectangle')) }}"
+                                        <img loading="lazy" decoding="async" src="{{ asset('assets/images/' . getSetting('logo_rectangle')) }}"
                                             id="preview-logo-rectangle"
                                             class="max-h-full object-contain transition-transform group-hover/item:scale-110">
                                     </div>
@@ -152,7 +152,7 @@
                                     class="flex items-center gap-6 p-6 rounded-3xl bg-white/5 border border-white/10 group/item">
                                     <div
                                         class="w-14 h-14 rounded-xl bg-secondary/80 border border-white/10 p-2 flex items-center justify-center overflow-hidden shrink-0">
-                                        <img src="{{ asset('assets/images/' . getSetting('favicon')) }}"
+                                        <img loading="lazy" decoding="async" src="{{ asset('assets/images/' . getSetting('favicon')) }}"
                                             id="preview-favicon"
                                             class="max-w-full max-h-full object-contain transition-transform group-hover/item:scale-110">
                                     </div>

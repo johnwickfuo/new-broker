@@ -49,7 +49,7 @@
                         $languages = config('languages');
                         $currentLang = $languages[$locale] ?? ['name' => $locale, 'flag' => 'us'];
                     @endphp
-                    <img src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}"
+                    <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}"
                         alt="{{ $currentLang['name'] }}" class="w-4 h-4 rounded-full object-cover">
                     <span class="text-sm font-medium hidden sm:inline-block">{{ $currentLang['name'] }}</span>
                     <svg class="w-3 h-3 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,7 +65,7 @@
                         @foreach ($languages as $code => $lang)
                             <a href="{{ route('lang.switch', $code) }}"
                                 class="flex items-center gap-3 px-3 py-2 text-sm text-text-secondary hover:text-white hover:bg-white/10 rounded-lg transition-colors {{ app()->getLocale() == $code ? 'bg-accent-primary/10 text-accent-primary' : '' }}">
-                                <img src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
+                                <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
                                     alt="{{ $lang['name'] }}" class="w-4 h-4 rounded-full object-cover">
                                 {{ $lang['name'] }}
                             </a>
@@ -85,7 +85,7 @@
                 @endphp
 
                 @if ($logoUrl)
-                    <img src="{{ $logoUrl }}" alt="{{ getSetting('name') }}"
+                    <img loading="lazy" decoding="async" src="{{ $logoUrl }}" alt="{{ getSetting('name') }}"
                         class="h-12 md:h-16 w-auto mx-auto drop-shadow-lg transition-transform duration-300 group-hover:scale-105">
                 @else
                     <h1

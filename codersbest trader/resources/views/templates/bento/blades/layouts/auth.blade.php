@@ -122,7 +122,7 @@
                     <div
                         class="relative z-10 w-80 h-80 mx-auto rounded-full p-2 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm ring-1 ring-white/10 overflow-hidden shadow-2xl animate-float transition-transform duration-500 group-hover:scale-105">
                         @if (isset($initialQuote['author_image']))
-                            <img id="hero-author-image"
+                            <img loading="lazy" decoding="async" id="hero-author-image"
                                 src="{{ asset('assets/templates/bento/images/authors/' . $initialQuote['author_image']) }}"
                                 class="w-full h-full object-cover rounded-full opacity-90 group-hover:opacity-100 transition-opacity duration-500"
                                 alt="{{ $initialQuote['author'] }}">
@@ -188,7 +188,7 @@
                             $languages = config('languages');
                             $currentLang = $languages[$locale] ?? ['name' => $locale, 'flag' => 'us'];
                         @endphp
-                        <img src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}"
+                        <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}"
                             alt="{{ $currentLang['name'] }}" class="w-4 h-4 rounded-full object-cover">
                         <span class="text-sm font-medium hidden sm:inline-block">{{ $currentLang['name'] }}</span>
                         <svg class="w-3 h-3 text-text-secondary" fill="none" stroke="currentColor"
@@ -204,7 +204,7 @@
                             @foreach ($languages as $code => $lang)
                                 <a href="{{ route('lang.switch', $code) }}"
                                     class="flex items-center gap-3 px-3 py-2 text-sm text-text-secondary hover:text-white hover:bg-white/10 rounded-lg transition-colors {{ app()->getLocale() == $code ? 'bg-accent-primary/10 text-accent-primary' : '' }}">
-                                    <img src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
+                                    <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
                                         alt="{{ $lang['name'] }}" class="w-4 h-4 rounded-full object-cover">
                                     {{ $lang['name'] }}
                                 </a>
@@ -228,7 +228,7 @@
                                     $version = $logo && file_exists($logoPath) ? filemtime($logoPath) : time();
                                 @endphp
                                 @if ($logo)
-                                    <img src="{{ asset('assets/images/' . $logo) . '?v=' . $version }}"
+                                    <img loading="lazy" decoding="async" src="{{ asset('assets/images/' . $logo) . '?v=' . $version }}"
                                         alt="{{ getSetting('name') }}" class="h-12 w-auto object-contain">
                                 @else
                                     <h2 class="text-2xl font-display font-bold text-white tracking-tight">

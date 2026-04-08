@@ -120,7 +120,7 @@
                                                 <div
                                                     class="w-10 h-10 rounded-xl bg-white p-1.5 flex-shrink-0 group-hover/row:scale-110 transition-transform">
                                                     @if (isset($stock['public_png_logo_url']) && $stock['public_png_logo_url'])
-                                                        <img src="{{ $stock['public_png_logo_url'] }}"
+                                                        <img loading="lazy" decoding="async" src="{{ $stock['public_png_logo_url'] }}"
                                                             alt="{{ $stock['ticker'] }}"
                                                             class="w-full h-full object-contain">
                                                     @else

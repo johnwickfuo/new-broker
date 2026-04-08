@@ -83,7 +83,7 @@
                     <div class="flex flex-col items-center text-center gap-4">
                         <div
                             class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 p-2 group-hover:bg-accent-primary/10 group-hover:border-accent-primary/20 transition-all duration-300">
-                            <img src="https://nowpayments.io{{ $currency['logo_url'] }}" alt="{{ $currency['name'] }}"
+                            <img loading="lazy" decoding="async" src="https://nowpayments.io{{ $currency['logo_url'] }}" alt="{{ $currency['name'] }}"
                                 class="w-full h-full object-contain filter drop-shadow group-hover:scale-110 transition-transform">
                         </div>
                         <div>

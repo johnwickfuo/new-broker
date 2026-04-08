@@ -186,7 +186,7 @@
                                     <div class="w-12 h-12 rounded-full bg-white/5 p-2 flex-shrink-0">
                                         {{-- Fallback for logo --}}
                                         @if (isset($stock['public_png_logo_url']) && $stock['public_png_logo_url'])
-                                            <img src="{{ $stock['public_png_logo_url'] }}" alt="{{ $stock['ticker'] }}"
+                                            <img loading="lazy" decoding="async" src="{{ $stock['public_png_logo_url'] }}" alt="{{ $stock['ticker'] }}"
                                                 class="w-full h-full object-contain">
                                         @else
                                             <div
@@ -249,7 +249,7 @@
                                     class="bg-[#0f1115] border border-white/10 rounded-xl p-4 flex items-center gap-4 hover:shadow-lg hover:shadow-accent-secondary/10 transition-all group">
                                     <div class="w-12 h-12 rounded-full bg-white/5 p-2 flex-shrink-0">
                                         @if (isset($etf['public_png_logo_url']) && $etf['public_png_logo_url'])
-                                            <img src="{{ $etf['public_png_logo_url'] }}" alt="{{ $etf['ticker'] }}"
+                                            <img loading="lazy" decoding="async" src="{{ $etf['public_png_logo_url'] }}" alt="{{ $etf['ticker'] }}"
                                                 class="w-full h-full object-contain">
                                         @else
                                             <div

@@ -226,7 +226,7 @@
                         <div class="flex items-center gap-4">
                             <div
                                 class="w-20 h-20 rounded-2xl overflow-hidden border border-white/10 flex-shrink-0 bg-white/5">
-                                <img id="create-preview" src="" alt="Preview"
+                                <img loading="lazy" decoding="async" id="create-preview" src="" alt="Preview"
                                     class="w-full h-full object-cover hidden">
                                 <div id="create-placeholder"
                                     class="w-full h-full flex items-center justify-center text-slate-600">
@@ -300,7 +300,7 @@
                         <div class="flex items-center gap-4">
                             <div
                                 class="w-20 h-20 rounded-2xl overflow-hidden border border-white/10 flex-shrink-0 bg-white/5">
-                                <img id="edit-preview" src="" alt="Preview"
+                                <img loading="lazy" decoding="async" id="edit-preview" src="" alt="Preview"
                                     class="w-full h-full object-cover hidden">
                                 <div id="edit-placeholder"
                                     class="w-full h-full flex items-center justify-center text-slate-600">

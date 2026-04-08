@@ -41,7 +41,7 @@
                         <div class="flex items-start gap-6">
                             <div
                                 class="w-24 h-24 rounded-2xl bg-white p-3 shadow-lg flex items-center justify-center shrink-0">
-                                <img src="{{ $marketEtfs['public_png_logo_url'] ?? '' }}" alt="{{ $marketEtfs['name'] }}"
+                                <img loading="lazy" decoding="async" src="{{ $marketEtfs['public_png_logo_url'] ?? '' }}" alt="{{ $marketEtfs['name'] }}"
                                     class="w-full h-full object-contain">
                             </div>
                             <div>

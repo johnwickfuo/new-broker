@@ -234,7 +234,7 @@
                                 <div class="currency-row" data-code="{{ $currency['code'] }}">
                                     <div class="flex items-center gap-3">
                                         <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center p-1.5">
-                                            <img src="https://nowpayments.io/images/coins/{{ strtolower($currency['code']) }}.svg"
+                                            <img loading="lazy" decoding="async" src="https://nowpayments.io/images/coins/{{ strtolower($currency['code']) }}.svg"
                                                 loading="lazy" decoding="async" class="w-full h-full object-contain">
                                         </div>
                                         <div class="flex flex-col">

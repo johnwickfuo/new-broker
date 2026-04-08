@@ -159,7 +159,7 @@
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-[#0B0F17] via-transparent to-transparent z-10 opacity-80 group-hover:opacity-60 transition-opacity">
                         </div>
-                        <img src="{{ asset('assets/images/team/ceo.png') }}" alt="CEO"
+                        <img loading="lazy" decoding="async" src="{{ asset('assets/images/team/ceo.png') }}" alt="CEO"
                             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                         <div class="absolute bottom-0 left-0 w-full p-8 lg:p-12 z-20">
                             <div class="flex items-center gap-4 mb-4">
@@ -180,7 +180,7 @@
                         class="md:col-span-2 lg:col-span-3 group relative rounded-[2.5rem] bg-[#0B0F17]/40 border border-white/5 overflow-hidden transition-all duration-700 hover:border-purple-500/30">
                         <div class="flex flex-col lg:flex-row h-full">
                             <div class="w-full lg:w-1/2 overflow-hidden">
-                                <img src="{{ asset('assets/images/team/cto.png') }}" alt="CTO"
+                                <img loading="lazy" decoding="async" src="{{ asset('assets/images/team/cto.png') }}" alt="CTO"
                                     class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 aspect-square lg:aspect-auto">
                             </div>
                             <div class="w-full lg:w-1/2 p-8 flex flex-col justify-center">
@@ -201,7 +201,7 @@
                         class="md:col-span-2 lg:col-span-3 group relative rounded-[2.5rem] bg-[#0B0F17]/40 border border-white/5 overflow-hidden transition-all duration-700 hover:border-emerald-500/30">
                         <div class="flex flex-col lg:flex-row h-full">
                             <div class="w-full lg:w-1/2 overflow-hidden order-1 lg:order-2">
-                                <img src="{{ asset('assets/images/team/asset_head.png') }}" alt="Head of strategy"
+                                <img loading="lazy" decoding="async" src="{{ asset('assets/images/team/asset_head.png') }}" alt="Head of strategy"
                                     class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 aspect-square lg:aspect-auto">
                             </div>
                             <div class="w-full lg:w-1/2 p-8 flex flex-col justify-center order-2 lg:order-1">
@@ -223,7 +223,7 @@
                         <div class="grid lg:grid-cols-12 gap-8 items-center relative z-10">
                             <div class="lg:col-span-2">
                                 <div class="w-24 h-24 rounded-full border-2 border-accent-primary/30 p-1 overflow-hidden">
-                                    <img src="{{ asset('assets/images/team/compliance_head.png') }}"
+                                    <img loading="lazy" decoding="async" src="{{ asset('assets/images/team/compliance_head.png') }}"
                                         class="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-700">
                                 </div>
                             </div>

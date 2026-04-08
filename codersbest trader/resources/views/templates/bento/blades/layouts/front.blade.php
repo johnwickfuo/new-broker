@@ -108,6 +108,12 @@
     <meta name="publisher" content="{{ $siteName }} Team">
 
 
+    {{-- Google Fonts: preconnect first, then non-blocking load --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Montserrat:wght@700&family=Playfair+Display:wght@400&family=Raleway:wght@600&family=Roboto:wght@400&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Montserrat:wght@700&family=Playfair+Display:wght@400&family=Raleway:wght@600&family=Roboto:wght@400&display=swap"></noscript>
+
     @if (config('site.use_vite'))
         @vite(['resources/views/templates/bento/css/app.css'])
     @else
@@ -351,7 +357,7 @@
             {{-- Logo --}}
             <a href="/" class="flex items-center gap-2 group">
                 @if (getSetting('logo_rectangle'))
-                    <img src="{{ asset('assets/images/' . getSetting('logo_rectangle')) }}"
+                    <img loading="lazy" decoding="async" src="{{ asset('assets/images/' . getSetting('logo_rectangle')) }}"
                         alt="{{ getSetting('name') }}"
                         class="h-8 w-auto transition-transform duration-300 group-hover:scale-105">
                 @else
@@ -516,7 +522,7 @@
                 <div class="relative items-center flex">
                     <button id="lang-switcher-btn"
                         class="flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 bg-white/5 transition-all duration-300">
-                        <img src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}"
+                        <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}"
                             alt="{{ $currentLang['name'] }}" class="w-4 h-4 rounded-full object-cover">
                         <span
                             class="text-sm font-medium text-text-secondary group-hover:text-white transition-colors">{{ $currentLang['name'] }}</span>
@@ -533,7 +539,7 @@
                             @foreach ($languages as $code => $lang)
                                 <a href="{{ route('lang.switch', $code) }}"
                                     class="flex items-center gap-3 px-3 py-2 text-sm text-text-secondary hover:text-white hover:bg-white/10 rounded-lg transition-colors {{ app()->getLocale() == $code ? 'bg-accent-primary/10 text-accent-primary' : '' }}">
-                                    <img src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
+                                    <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
                                         alt="{{ $lang['name'] }}" class="w-4 h-4 rounded-full object-cover">
                                     {{ $lang['name'] }}
                                 </a>
@@ -583,7 +589,7 @@
         <div class="p-6 border-b border-white/5 flex items-center justify-between">
             <a href="{{ url('/') }}" class="flex items-center gap-2 group">
                 @if (getSetting('logo_rectangle'))
-                    <img src="{{ asset('assets/images/' . getSetting('logo_rectangle')) }}"
+                    <img loading="lazy" decoding="async" src="{{ asset('assets/images/' . getSetting('logo_rectangle')) }}"
                         alt="{{ getSetting('name') }}"
                         class="h-6 w-auto transition-transform duration-300 group-hover:scale-105">
                 @else
@@ -856,7 +862,7 @@
                 <div class="max-w-xs">
                     <a href="/" class="flex items-center gap-2 mb-6">
                         @if (getSetting('logo_rectangle'))
-                            <img src="{{ asset('assets/images/' . getSetting('logo_rectangle')) }}"
+                            <img loading="lazy" decoding="async" src="{{ asset('assets/images/' . getSetting('logo_rectangle')) }}"
                                 alt="{{ getSetting('name') }}" class="h-8 w-auto">
                         @else
                             <h1 class="font-heading text-2xl font-bold text-white tracking-tight">
@@ -914,7 +920,7 @@
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
     @if (config('site.use_vite'))
         @vite(['resources/views/templates/bento/js/app.js'])
     @else

@@ -13,6 +13,12 @@
     <meta name="theme-color" content="#0f172a">
     <meta name="author" content="{{ getSetting('name') }} Team">
     <meta name="publisher" content="{{ getSetting('name') }} Team">
+    {{-- Google Fonts: preconnect first, then non-blocking load --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Montserrat:wght@700&family=Playfair+Display:wght@400&family=Raleway:wght@600&family=Roboto:wght@400&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Montserrat:wght@700&family=Playfair+Display:wght@400&family=Raleway:wght@600&family=Roboto:wght@400&display=swap"></noscript>
+
     @if (config('site.use_vite'))
         @vite(['resources/views/templates/bento/css/app.css'])
     @else
@@ -66,7 +72,7 @@
         <div class="h-20 flex items-center px-8 border-b border-white/5 bg-secondary-dark/50 backdrop-blur-xl">
             <a href="{{ route('user.dashboard') }}" class="group block w-full">
                 @if (getSetting('logo_rectangle'))
-                    <img src="{{ asset('assets/images/' . getSetting('logo_rectangle')) }}"
+                    <img loading="lazy" decoding="async" src="{{ asset('assets/images/' . getSetting('logo_rectangle')) }}"
                         alt="{{ getSetting('name') }}"
                         class="h-8 w-auto transition-transform duration-300 group-hover:scale-105">
                 @else
@@ -221,7 +227,7 @@
             <!-- Logo -->
             <a href="{{ route('user.dashboard') }}" class="block shrink-0">
                 @if (getSetting('logo_square'))
-                    <img src="{{ asset('assets/images/' . getSetting('logo_square')) }}"
+                    <img loading="lazy" decoding="async" src="{{ asset('assets/images/' . getSetting('logo_square')) }}"
                         alt="{{ getSetting('name') }}" class="h-8 w-auto">
                 @else
                     <h1 class="font-heading text-xl font-bold text-white">
@@ -274,7 +280,7 @@
                 <div class="relative">
                     <button onclick="toggleDropdown('mobile-header-lang-menu')"
                         class="flex items-center justify-center w-8 h-8 rounded-full bg-white/5 border border-white/10 hover:border-accent-primary/30 transition-colors cursor-pointer">
-                        <img src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}"
+                        <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}"
                             class="w-4 h-4 rounded-full object-cover">
                     </button>
                     <div id="mobile-header-lang-menu"
@@ -283,7 +289,7 @@
                             @foreach ($languages as $code => $lang)
                                 <a href="{{ route('lang.switch', $code) }}"
                                     class="flex items-center gap-3 px-3 py-2 text-sm text-text-secondary hover:text-white hover:bg-white/10 rounded-lg transition-colors {{ app()->getLocale() == $code ? 'bg-accent-primary/10 text-accent-primary' : '' }}">
-                                    <img src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
+                                    <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
                                         alt="{{ $lang['name'] }}" class="w-4 h-4 rounded-full object-cover">
                                     {{ $lang['name'] }}
                                 </a>
@@ -504,7 +510,7 @@
                 <div class="relative group" id="desktop-lang-switcher">
                     <button
                         class="flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:bg-white/5 bg-white/5 transition-all duration-300">
-                        <img src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}"
+                        <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}"
                             alt="{{ $currentLang['name'] }}" class="w-4 h-4 rounded-full object-cover">
                         <span
                             class="text-sm font-medium text-text-secondary group-hover:text-white transition-colors">{{ $currentLang['name'] }}</span>
@@ -521,7 +527,7 @@
                             @foreach ($languages as $code => $lang)
                                 <a href="{{ route('lang.switch', $code) }}"
                                     class="flex items-center gap-3 px-3 py-2 text-sm text-text-secondary hover:text-white hover:bg-white/10 rounded-lg transition-colors {{ app()->getLocale() == $code ? 'bg-accent-primary/10 text-accent-primary' : '' }}">
-                                    <img src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
+                                    <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
                                         alt="{{ $lang['name'] }}" class="w-4 h-4 rounded-full object-cover">
                                     {{ $lang['name'] }}
                                 </a>
@@ -729,7 +735,7 @@
         <div class="h-16 flex items-center justify-between px-6 border-b border-white/5">
             <a href="{{ url('/') }}" class="flex items-center gap-2 group">
                 @if (getSetting('logo_rectangle'))
-                    <img src="{{ asset('assets/images/' . getSetting('logo_rectangle')) }}"
+                    <img loading="lazy" decoding="async" src="{{ asset('assets/images/' . getSetting('logo_rectangle')) }}"
                         alt="{{ getSetting('name') }}"
                         class="h-6 w-auto transition-transform duration-300 group-hover:scale-105">
                 @else
@@ -848,7 +854,7 @@
                 <button onclick="document.getElementById('mobile-lang-menu').classList.toggle('hidden')"
                     class="flex w-full items-center justify-between px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-text-secondary hover:text-white transition-colors">
                     <div class="flex items-center gap-3">
-                        <img src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}"
+                        <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}"
                             alt="{{ $currentLang['name'] }}" class="w-5 h-5 rounded-full object-cover">
                         <span class="text-sm font-medium">{{ $currentLang['name'] }}</span>
                     </div>
@@ -863,7 +869,7 @@
                     @foreach ($languages as $code => $lang)
                         <a href="{{ route('lang.switch', $code) }}"
                             class="flex items-center gap-3 px-4 py-3 text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-colors {{ app()->getLocale() == $code ? 'bg-accent-primary/10 text-accent-primary' : '' }}">
-                            <img src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
+                            <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
                                 alt="{{ $lang['name'] }}" class="w-5 h-5 rounded-full object-cover">
                             {{ $lang['name'] }}
                         </a>
@@ -890,8 +896,8 @@
 
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 
     @if (config('site.use_vite'))
         @vite(['resources/views/templates/bento/js/app.js'])

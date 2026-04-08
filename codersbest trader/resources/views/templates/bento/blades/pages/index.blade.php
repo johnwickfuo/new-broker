@@ -238,7 +238,7 @@
                 <div class="flex items-center gap-2">
                     <div
                         class="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-500">
-                        <img src="{{ 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/refs/heads/master/svg/color/' . $btc['logo'] }}"
+                        <img loading="lazy" decoding="async" src="{{ 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/refs/heads/master/svg/color/' . $btc['logo'] }}"
                             alt="BTC" class="w-4 h-4 lg:w-5 lg:h-5">
                     </div>
                     <div>
@@ -392,7 +392,7 @@
                                 <img src="{{ $mockup }}" class="w-full h-auto shrink-0" alt="Dashboard Interface">
                             @endforeach
                         @else
-                            <img src="{{ asset('assets/templates/bento/images/dashboard-mockup-dark.png') }}"
+                            <img loading="lazy" decoding="async" src="{{ asset('assets/templates/bento/images/dashboard-mockup-dark.png') }}"
                                 class="w-full h-auto shrink-0" alt="Dashboard Interface"
                                 onerror="this.src='https://placehold.co/1200x800/1e293b/FFFFFF?text=Lozand+Dashboard+Interface'">
                         @endif
@@ -447,7 +447,7 @@
                         @endphp
                         <div class="flex items-center gap-3">
                             @if (!empty($stat['public_png_logo_url']))
-                                <img src="{{ $stat['public_png_logo_url'] }}"
+                                <img loading="lazy" decoding="async" src="{{ $stat['public_png_logo_url'] }}"
                                     class="w-5 h-5 rounded-full object-contain bg-white/10 p-0.5"
                                     onerror="this.style.display='none'">
                             @endif
@@ -589,7 +589,7 @@
                             <div class="hidden lg:flex flex-1 items-center justify-center">
                                 <div
                                     class="relative w-full aspect-square rounded-3xl overflow-hidden border border-white/10 group/media">
-                                    <img src="{{ asset($feature['image']) }}" alt="{{ $feature['title'] }}"
+                                    <img loading="lazy" decoding="async" src="{{ asset($feature['image']) }}" alt="{{ $feature['title'] }}"
                                         class="w-full h-full object-cover transition-transform duration-700 group-hover/media:scale-110">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                     <div

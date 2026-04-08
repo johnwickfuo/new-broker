@@ -17,7 +17,7 @@
                     {{-- Illustrative Layer (Liquidity) --}}
                     <div
                         class="absolute -right-20 -bottom-20 w-[450px] h-[450px] opacity-10 group-hover:opacity-30 transition-all duration-1000 pointer-events-none grayscale group-hover:grayscale-0">
-                        <img src="{{ asset('assets/images/sectors/cash.png') }}"
+                        <img loading="lazy" decoding="async" src="{{ asset('assets/images/sectors/cash.png') }}"
                             class="w-full h-full object-cover rounded-full">
                     </div>
 

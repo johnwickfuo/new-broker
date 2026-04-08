@@ -121,7 +121,7 @@
                                             </select>
                                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
                                                 id="selected_flag_container">
-                                                <img src="{{ asset('assets/flags/us.svg') }}"
+                                                <img loading="lazy" decoding="async" src="{{ asset('assets/flags/us.svg') }}"
                                                     class="w-5 h-auto rounded-sm object-cover" id="selected_flag">
                                             </div>
                                             <div
@@ -195,7 +195,7 @@
                                         <span
                                             class="text-xs text-text-secondary font-medium">{{ __('Click to upload') }}</span>
                                     </div>
-                                    <img id="preview_doc_front"
+                                    <img loading="lazy" decoding="async" id="preview_doc_front"
                                         class="absolute inset-0 w-full h-full object-cover rounded-xl hidden pointer-events-none">
                                 </div>
                             </div>
@@ -216,7 +216,7 @@
                                         <span
                                             class="text-xs text-text-secondary font-medium">{{ __('Click to upload') }}</span>
                                     </div>
-                                    <img id="preview_doc_back"
+                                    <img loading="lazy" decoding="async" id="preview_doc_back"
                                         class="absolute inset-0 w-full h-full object-cover rounded-xl hidden pointer-events-none">
                                 </div>
                             </div>
@@ -264,7 +264,7 @@
                                 <canvas id="camera_canvas" class="hidden"></canvas>
 
                                 <!-- Captured Image Preview -->
-                                <img id="selfie_preview"
+                                <img loading="lazy" decoding="async" id="selfie_preview"
                                     class="absolute inset-0 w-full h-full object-cover hidden pointer-events-none">
 
                                 <!-- Camera UI Overlay (Capture Button) -->
@@ -333,7 +333,7 @@
                                         @endforeach
                                     </select>
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <img src="{{ asset('assets/flags/us.svg') }}"
+                                        <img loading="lazy" decoding="async" src="{{ asset('assets/flags/us.svg') }}"
                                             class="w-6 h-auto rounded-sm object-cover hidden" id="address_flag_img">
                                         <div id="address_flag_placeholder" class="w-6 h-4 bg-white/10 rounded-sm"></div>
                                     </div>

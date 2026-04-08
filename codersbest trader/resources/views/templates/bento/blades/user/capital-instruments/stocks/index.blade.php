@@ -220,7 +220,7 @@
                                 <div class="col-span-12 md:col-span-5 flex items-center gap-4">
                                     <div
                                         class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl group-hover:scale-105 transition-transform">
-                                        <img src={{ $stock['public_png_logo_url'] }} alt="{{ $stock['name'] }}"
+                                        <img loading="lazy" decoding="async" src={{ $stock['public_png_logo_url'] }} alt="{{ $stock['name'] }}"
                                             class="w-full h-full object-contain">
                                     </div>
                                     <div>
@@ -580,7 +580,7 @@
                         <div class="flex items-center gap-4 mb-6">
                             <div
                                 class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-2 shadow-lg">
-                                <img id="modal-stock-logo" src="" alt="Stock Logo"
+                                <img loading="lazy" decoding="async" id="modal-stock-logo" src="" alt="Stock Logo"
                                     class="w-full h-full object-contain rounded-lg">
                             </div>
                             <div>

@@ -121,7 +121,7 @@
                                                 <div
                                                     class="w-10 h-10 rounded-xl bg-accent-primary/10 flex items-center justify-center text-accent-primary group-hover/row:scale-110 transition-transform">
                                                     @if (isset($bond['flag']))
-                                                        <img src="https://flagcdn.com/w40/{{ strtolower($bond['flag']) }}.png"
+                                                        <img loading="lazy" decoding="async" src="https://flagcdn.com/w40/{{ strtolower($bond['flag']) }}.png"
                                                             alt="{{ $bond['county'] ?? '' }}"
                                                             class="w-6 rounded-sm opacity-80 group-hover/row:opacity-100 transition-opacity">
                                                     @else

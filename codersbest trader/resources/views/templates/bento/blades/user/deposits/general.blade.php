@@ -491,7 +491,7 @@
 
                                         {{-- Preview State --}}
                                         <div id="file-preview-container" class="absolute inset-0 hidden">
-                                            <img id="file-preview-image" src="" alt="Preview"
+                                            <img loading="lazy" decoding="async" id="file-preview-image" src="" alt="Preview"
                                                 class="w-full h-full object-cover opacity-60">
                                             <div
                                                 class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">

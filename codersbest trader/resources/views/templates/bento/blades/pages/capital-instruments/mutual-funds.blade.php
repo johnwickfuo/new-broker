@@ -146,7 +146,7 @@
                                                 <div
                                                     class="w-10 h-10 rounded-xl bg-accent-primary/5 flex items-center justify-center text-accent-primary group-hover/row:scale-110 transition-transform overflow-hidden p-1 border border-white/5">
                                                     @if (isset($fund['public_png_logo_url']) && $fund['public_png_logo_url'])
-                                                        <img src="{{ $fund['public_png_logo_url'] }}"
+                                                        <img loading="lazy" decoding="async" src="{{ $fund['public_png_logo_url'] }}"
                                                             alt="{{ $fund['ticker'] ?? '' }}"
                                                             class="w-full h-full object-contain filter grayscale group-hover/row:grayscale-0 transition-all">
                                                     @else

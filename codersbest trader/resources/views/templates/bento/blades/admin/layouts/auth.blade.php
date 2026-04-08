@@ -43,7 +43,7 @@
                     $languages = config('languages');
                     $currentLang = $languages[$locale] ?? ['name' => $locale, 'flag' => 'us'];
                 @endphp
-                <img src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}" alt="{{ $currentLang['name'] }}"
+                <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $currentLang['flag'] . '.svg') }}" alt="{{ $currentLang['name'] }}"
                     class="w-4 h-4 rounded-full object-cover">
                 <span class="text-sm font-medium hidden sm:inline-block">{{ $currentLang['name'] }}</span>
                 <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,7 +58,7 @@
                     @foreach ($languages as $code => $lang)
                         <a href="{{ route('lang.switch', $code) }}"
                             class="flex items-center gap-3 px-3 py-2 text-sm text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors {{ app()->getLocale() == $code ? 'bg-indigo-500/10 text-indigo-500' : '' }}">
-                            <img src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}" alt="{{ $lang['name'] }}"
+                            <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}" alt="{{ $lang['name'] }}"
                                 class="w-4 h-4 rounded-full object-cover">
                             {{ $lang['name'] }}
                         </a>
@@ -76,7 +76,7 @@
                     $logo = getSetting('logo_rectangle');
                 @endphp
                 @if ($logo)
-                    <img src="{{ asset('assets/images/' . $logo) }}" alt="{{ getSetting('name') }}"
+                    <img loading="lazy" decoding="async" src="{{ asset('assets/images/' . $logo) }}" alt="{{ getSetting('name') }}"
                         class="h-10 w-auto">
                 @else
                     <span class="text-2xl font-bold text-white tracking-tight">{{ getSetting('name') }}</span>

@@ -194,7 +194,7 @@
                                     id="lang-card-{{ $code }}">
                                     <div class="flex items-center gap-3">
                                         <div class="w-10 h-10 rounded-full overflow-hidden border border-white/10">
-                                            <img src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
+                                            <img loading="lazy" decoding="async" src="{{ asset('assets/flags/' . $lang['flag'] . '.svg') }}"
                                                 alt="{{ $lang['name'] }}" class="w-full h-full object-cover">
                                         </div>
                                         <div class="flex flex-col">

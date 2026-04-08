@@ -88,7 +88,7 @@
                         <div class="flex items-center gap-6">
                             <div
                                 class="shrink-0 flex items-center justify-center p-2 bg-white/5 rounded-xl border border-white/5 group-hover:border-emerald-500/30 transition-all duration-500">
-                                <img src="{{ asset('assets/images/polymarket.png') }}" alt="Polymarket"
+                                <img loading="lazy" decoding="async" src="{{ asset('assets/images/polymarket.png') }}" alt="Polymarket"
                                     class="h-8 w-auto object-contain">
                             </div>
                             <div>

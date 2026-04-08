@@ -37,7 +37,7 @@
                     <div class="flex items-center gap-5">
                         <div
                             class="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-2 shadow-xl">
-                            <img src="{{ $marketStock['public_png_logo_url'] ?? '' }}" alt="{{ $marketStock['name'] }}"
+                            <img loading="lazy" decoding="async" src="{{ $marketStock['public_png_logo_url'] ?? '' }}" alt="{{ $marketStock['name'] }}"
                                 class="w-full h-full object-contain rounded-lg">
                         </div>
                         <div>

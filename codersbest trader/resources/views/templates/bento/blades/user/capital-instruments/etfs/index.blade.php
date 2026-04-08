@@ -165,7 +165,7 @@
                                     <div class="flex justify-between items-start mb-6 relative z-10">
                                         <div
                                             class="w-14 h-14 rounded-2xl bg-white p-2 shadow-lg flex items-center justify-center">
-                                            <img src="{{ $etf['public_png_logo_url'] ?? '' }}" alt="{{ $etf['ticker'] }}"
+                                            <img loading="lazy" decoding="async" src="{{ $etf['public_png_logo_url'] ?? '' }}" alt="{{ $etf['ticker'] }}"
                                                 class="w-full h-full object-contain">
                                         </div>
                                         <div class="flex flex-col items-end">
