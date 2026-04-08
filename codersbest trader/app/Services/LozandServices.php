@@ -702,9 +702,12 @@ class LozandServices
     private function normalizeTwelveDataQuote(array $quote): array
     {
         $fiftyTwoWeek = $quote['fifty_two_week'] ?? [];
+        $symbol       = $quote['symbol'] ?? '';
+        $changePct    = (float)($quote['percent_change'] ?? 0);
+        $change       = (float)($quote['change']         ?? 0);
 
         return [
-            'ticker'                    => $quote['symbol']          ?? '',
+            'ticker'                    => $symbol,
             'name'                      => $quote['name']             ?? '',
             'exchange'                  => $quote['exchange']         ?? '',
             'currency'                  => $quote['currency']         ?? 'USD',
@@ -713,15 +716,21 @@ class LozandServices
             'high'                      => (float)($quote['high']     ?? 0),
             'low'                       => (float)($quote['low']      ?? 0),
             'previous_close'            => (float)($quote['previous_close'] ?? 0),
-            'change'                    => (float)($quote['change']          ?? 0),
-            'change_percent'            => (float)($quote['percent_change']  ?? 0),
-            'volume'                    => (float)($quote['volume']          ?? 0),
-            '52w_high'                  => (float)($fiftyTwoWeek['high']     ?? 0),
-            '52w_low'                   => (float)($fiftyTwoWeek['low']      ?? 0),
-            // Fields used by ETF portfolio calculations (not available in free tier; default to 0)
+            'change'                    => $change,
+            'change_percent'            => $changePct,
+            'volume'                    => (float)($quote['volume']   ?? 0),
+            '52w_high'                  => (float)($fiftyTwoWeek['high'] ?? 0),
+            '52w_low'                   => (float)($fiftyTwoWeek['low']  ?? 0),
+            // Fields used by ETF portfolio calculations (not in free tier)
             'ytd_return'                => 0,
             'change_50_day_percentage'  => 0,
             'change_200_day_percentage' => 0,
+            // Aliases expected by existing blade templates (previously from Binso)
+            'change_1d'                 => $change,
+            'change_1d_percentage'      => $changePct,
+            'change_1d_percent'         => $changePct,
+            // Stock logo via Clearbit Logo API (returns blank image if not found, never crashes)
+            'public_png_logo_url'       => 'https://logo.clearbit.com/' . strtolower($symbol) . '.com',
         ];
     }
 
@@ -756,17 +765,31 @@ class LozandServices
      */
     private function normalizeBinanceTicker(array $ticker): array
     {
+        $symbol        = $ticker['symbol'] ?? '';
+        $change        = (float)($ticker['priceChange']        ?? 0);
+        $changePct     = (float)($ticker['priceChangePercent'] ?? 0);
+
+        // Derive a crypto logo filename for the cryptocurrency-icons SVG repo.
+        // e.g. "BTCUSDT" → "btc.svg", "ETHUSDT" → "eth.svg"
+        $base  = strtolower(preg_replace('/(usdt|busd|usdc|bnb|btc|eth)$/i', '', $symbol));
+        $logo  = $base ? $base . '.svg' : 'generic.svg';
+
         return [
-            'ticker'          => $ticker['symbol']             ?? '',
-            'current_price'   => (float)($ticker['lastPrice']  ?? 0),
-            'bid'             => (float)($ticker['bidPrice']   ?? 0),
-            'ask'             => (float)($ticker['askPrice']   ?? 0),
-            'change'          => (float)($ticker['priceChange']        ?? 0),
-            'change_percent'  => (float)($ticker['priceChangePercent'] ?? 0),
-            'high_24h'        => (float)($ticker['highPrice']          ?? 0),
-            'low_24h'         => (float)($ticker['lowPrice']           ?? 0),
-            'volume_24h'      => (float)($ticker['volume']             ?? 0),
-            'quote_volume'    => (float)($ticker['quoteVolume']        ?? 0),
+            'ticker'              => $symbol,
+            'current_price'       => (float)($ticker['lastPrice'] ?? 0),
+            'bid'                 => (float)($ticker['bidPrice']  ?? 0),
+            'ask'                 => (float)($ticker['askPrice']  ?? 0),
+            'change'              => $change,
+            'change_percent'      => $changePct,
+            'high_24h'            => (float)($ticker['highPrice']  ?? 0),
+            'low_24h'             => (float)($ticker['lowPrice']   ?? 0),
+            'volume_24h'          => (float)($ticker['volume']     ?? 0),
+            'quote_volume'        => (float)($ticker['quoteVolume'] ?? 0),
+            // Aliases expected by existing blade templates (previously from Binso)
+            'logo'                => $logo,
+            'change_1d'           => $change,
+            'change_1d_percentage'=> $changePct,
+            'change_1d_percent'   => $changePct,
         ];
     }
 
