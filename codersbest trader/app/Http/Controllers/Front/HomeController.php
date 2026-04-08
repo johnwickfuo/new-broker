@@ -36,7 +36,7 @@ class HomeController extends Controller
 
         $regulatoryCompliance = json_decode(getSetting('regulatory_compliance'), true);
 
-        $aaple = [];
+        $aapl = [];
         $aapl_data_request = $lozand->ticker("AAPL");
         if ($aapl_data_request['status'] == 'success') {
             $aapl = $aapl_data_request['data'];
