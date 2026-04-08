@@ -803,6 +803,9 @@ class LozandServices
             'change_percent'       => $changePct,
             'high_24h'             => (float)($ticker['highPrice']  ?? 0),
             'low_24h'              => (float)($ticker['lowPrice']   ?? 0),
+            // Blade aliases — some templates use 'high'/'low' directly
+            'high'                 => (float)($ticker['highPrice']  ?? 0),
+            'low'                  => (float)($ticker['lowPrice']   ?? 0),
             'volume_24h'           => (float)($ticker['volume']     ?? 0),
             'quote_volume'         => (float)($ticker['quoteVolume'] ?? 0),
             // Aliases expected by existing blade templates (previously from Binso)

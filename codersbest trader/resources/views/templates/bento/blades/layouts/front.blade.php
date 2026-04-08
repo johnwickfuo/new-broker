@@ -920,7 +920,7 @@
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     @if (config('site.use_vite'))
         @vite(['resources/views/templates/bento/js/app.js'])
     @else
