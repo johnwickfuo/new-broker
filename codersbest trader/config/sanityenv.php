@@ -14,7 +14,7 @@ return [
     'NOWPAYMENT_PASSWORD' => 'password',
     'NOWPAYMENT_2FA_SECRET' => 'xxxxxxx',
     'PRODUCT_KEY' => 'xxxxxxxx',
-    'BINSO_API_KEY' => 'xxxxxxx',
+    'TWELVE_DATA_API_KEY' => 'your_twelve_data_api_key_here',
     'GOOGLE_CLIENT_ID' => 'xxxxxxx',
     'GOOGLE_CLIENT_SECRET' => 'xxxxxxxxx',
     'USE_VITE' => false,

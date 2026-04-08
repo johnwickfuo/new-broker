@@ -71,26 +71,11 @@ class ActivationController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'product_key' => 'nullable|string|max:255',
-            'binso_api_key' => 'nullable|string|max:255',
+            'product_key'       => 'nullable|string|max:255',
+            'twelve_data_key'   => 'nullable|string|max:255',
         ]);
-        $product_key = $request->product_key;
-        $binso_api_key = $request->binso_api_key;
-
-        if ($binso_api_key) {
-            // check if its valid UUID
-            if (!str()->isUuid($binso_api_key) && $binso_api_key !== 'DEMO') {
-                if ($request->ajax()) {
-                    return response()->json([
-                        'status' => 'error',
-                        'message' => __('Invalid binso api key.')
-                    ], 400);
-                }
-                return back()->with('error', __('Invalid binso api key.'));
-            }
-
-        }
-
+        $product_key     = $request->product_key;
+        $twelve_data_key = $request->twelve_data_key;
 
         if ($product_key) {
             // check if its valid UUID
@@ -146,8 +131,8 @@ class ActivationController extends Controller
 
 
 
-        if (safeDecrypt(config('site.binso_api_key')) != $binso_api_key) {
-            updateEnv('BINSO_API_KEY', encrypt($binso_api_key));
+        if ($twelve_data_key && env('TWELVE_DATA_API_KEY') !== $twelve_data_key) {
+            updateEnv('TWELVE_DATA_API_KEY', $twelve_data_key);
         }
 
         if ($request->ajax()) {

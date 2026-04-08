@@ -18,7 +18,6 @@ return [
     'nowpayment_password' => env("NOWPAYMENT_PASSWORD", ''),
     'nowpayment_2fa_secret' => env("NOWPAYMENT_2FA_SECRET", ''),
     'product_key' => env('PRODUCT_KEY'),
-    'binso_api_key' => env('BINSO_API_KEY'),
     'version' => env('APP_VERSION', '1.0.0'),
 
     'settings_defaults' => [

@@ -47,9 +47,9 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-    'binso' => [
-        'base_url' => env('BINSO_API_URL', 'https://binso.io/api/v1'),
-        'api_key' => env('BINSO_API_KEY'),
+    'twelvedata' => [
+        'base_url' => env('TWELVE_DATA_API_URL', 'https://api.twelvedata.com'),
+        'api_key'  => env('TWELVE_DATA_API_KEY'),
     ],
 
     'google' => [

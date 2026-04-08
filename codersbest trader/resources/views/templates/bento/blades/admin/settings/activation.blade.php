@@ -51,7 +51,7 @@
                             {{ __('Activation Settings') }}
                         </h2>
                         <p class="text-slate-500 text-xs font-medium tracking-wide uppercase">
-                            {{ __('Manage product activation and Binso API keys') }}
+                            {{ __('Manage product activation and market data API keys') }}
                         </p>
                     </div>
                 </div>
@@ -212,7 +212,7 @@
 
 
 
-                        {{-- Binso IP Whitelisting Instructions --}}
+                        {{-- Twelve Data API Setup --}}
                         <div
                             class="mb-12 p-8 rounded-[2rem] bg-indigo-500/5 border border-indigo-500/10 flex flex-col gap-8 mt-12">
                             <div class="flex items-center gap-4">
@@ -220,14 +220,14 @@
                                     class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                                     </svg>
                                 </div>
                                 <div class="flex flex-col">
                                     <h4 class="text-base font-bold text-white tracking-wide uppercase">
-                                        {{ __('Binso.io API') }}</h4>
+                                        {{ __('Twelve Data API') }}</h4>
                                     <p class="text-[10px] text-slate-500 font-medium uppercase tracking-widest">
-                                        {{ __('Authorize your server for data access') }}</p>
+                                        {{ __('Free API for stocks, ETFs & forex data') }}</p>
                                 </div>
                             </div>
 
@@ -235,23 +235,20 @@
                                 @php
                                     $steps = [
                                         [
-                                            'icon' =>
-                                                'M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1',
-                                            'text' => __('Go to :url and login', ['url' => 'https://binso.io']),
+                                            'icon' => 'M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1',
+                                            'text' => __('Go to twelvedata.com and create a free account'),
                                         ],
                                         [
-                                            'icon' =>
-                                                'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 002 2h2a2 2 0 012 2',
-                                            'text' => __('In dashboard sidebar, click "My Subscriptions"'),
+                                            'icon' => 'M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z',
+                                            'text' => __('Copy your API key from the dashboard'),
                                         ],
                                         [
                                             'icon' => 'M13 7l5 5m0 0l-5 5m5-5H6',
-                                            'text' => __('Click the chevron icon > on your active subscription'),
+                                            'text' => __('Paste it in the API Key field below and save'),
                                         ],
                                         [
-                                            'icon' =>
-                                                'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z',
-                                            'text' => __('Click "API Setting" then "Add New Address"'),
+                                            'icon' => 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+                                            'text' => __('Free tier: 800 API credits/day — sufficient for normal platform usage'),
                                         ],
                                     ];
                                 @endphp
@@ -279,14 +276,14 @@
                                     </div>
                                     <div class="flex flex-col gap-1 relative z-10">
                                         <span
-                                            class="text-[9px] font-black text-indigo-400 uppercase tracking-widest">{{ __('Step 5: Copy Your Server IP') }}</span>
+                                            class="text-[9px] font-black text-indigo-400 uppercase tracking-widest">{{ __('Your Server IP') }}</span>
                                         <h5 class="text-xl font-black text-white tracking-widest">
                                             {{ sandBoxCredentials($server_ip) ?? 'N/A' }}</h5>
                                     </div>
                                     <div class="flex flex-col items-center md:items-end gap-3 relative z-10">
                                         <p
                                             class="text-[10px] text-slate-400 font-medium text-center md:text-right max-w-[200px]">
-                                            {{ __('Paste this IP in your Binso settings and click "Save Configurations"') }}
+                                            {{ __('Your server public IP address (for reference)') }}
                                         </p>
                                         <button type="button"
                                             onclick="copyToClipboard('{{ sandBoxCredentials($server_ip) }}')"
@@ -303,16 +300,16 @@
 
                                 <div class="flex flex-col gap-3 mt-4">
                                     <label class="text-[15px] font-bold text-slate-500 uppercase tracking-widest">
-                                        {{ __('API Key') }}
+                                        {{ __('Twelve Data API Key') }}
                                     </label>
-                                    <input type="text" name="binso_api_key"
-                                        value="{{ sandBoxCredentials(safeDecrypt(config('site.binso_api_key'))) ?? 'DEMO' }}"
-                                        class="flat-input" placeholder="Enter Binso API Key">
+                                    <input type="text" name="twelve_data_key"
+                                        value="{{ sandBoxCredentials(env('TWELVE_DATA_API_KEY')) }}"
+                                        class="flat-input" placeholder="Enter Twelve Data API Key">
                                     <div class="text-[10px] text-slate-400 font-medium leading-relaxed">
-                                        {{ __('Get your binso API Key from') }}
-                                        <a href="https://binso.com" target="_blank"
-                                            class="text-accent-primary hover:text-accent-primary/80 transition-colors">{{ __('binso.com') }}</a>.
-                                        {{ __('This is used for market prices, stocks, futures, margin, etc. The system requires it for functionality. Use DEMO for testing (5 days).') }}
+                                        {{ __('Get your free API Key from') }}
+                                        <a href="https://twelvedata.com" target="_blank"
+                                            class="text-accent-primary hover:text-accent-primary/80 transition-colors">twelvedata.com</a>.
+                                        {{ __('Used for stocks, ETFs and forex market data. Crypto data (futures & margin) uses the free Binance public API — no key needed.') }}
                                     </div>
                                 </div>
                             </div>
