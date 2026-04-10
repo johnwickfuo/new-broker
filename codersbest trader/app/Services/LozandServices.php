@@ -54,7 +54,15 @@ class LozandServices
 
     public function __construct()
     {
-        $this->twelveDataUrl = config('services.twelvedata.base_url', 'https://api.twelvedata.com');
+        $raw = config('services.twelvedata.base_url', 'https://api.twelvedata.com');
+
+        // Normalise to scheme://host only — strip any path, query or fragment
+        // so the env value can be a full example URL without breaking requests.
+        $parsed = parse_url((string) $raw);
+        $scheme  = $parsed['scheme'] ?? 'https';
+        $host    = $parsed['host']   ?? 'api.twelvedata.com';
+        $this->twelveDataUrl = rtrim($scheme . '://' . $host, '/');
+
         $this->twelveDataKey = config('services.twelvedata.api_key', '');
     }
 
